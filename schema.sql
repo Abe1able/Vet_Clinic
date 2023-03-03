@@ -25,3 +25,22 @@ name VARCHAR);
 ALTER TABLE animals DROP COLUMN species;
 ALTER TABLE animals ADD COLUMN species_id INT REFERENCES species(id);
 ALTER TABLE animals ADD COLUMN owner_id INT REFERENCES owners(id);
+
+-- Join tables
+-- Vets table
+CREATE TABLE vets(
+id SERIAL NOT NULL PRIMARY KEY,
+name VARCHAR,
+age INT,
+date_of_graduation DATE
+);
+-- specialization table join table between species and vets
+CREATE TABLE specializations(
+species_id INT REFERENCES species(id),
+vet_id INT REFERENCES vets(id));
+
+-- visits table join table between animals and vets
+CREATE TABLE visits(
+animal_id INT REFERENCES animals(id),
+vet_id INT REFERENCES vets(id),
+date_of_visit DATE);
